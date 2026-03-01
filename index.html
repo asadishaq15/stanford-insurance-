@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stafford Insurance Solutions - Final Expense Insurance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #176CAB;
+            --secondary: #2C99D2;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 85px;
+            /* Adjust based on navbar height */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+            flex-wrap: nowrap;
+        }
+
+        .nav-menu li {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+            line-height: normal;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        /* Hamburger active state */
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 90px;
+            width: auto;
+        }
+
+        .logo-text {
+            display: none;
+            /* Hide old text branding if using image logo */
+        }
+
+        .logo-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .logo-subtitle {
+            font-size: 0.8rem;
+            color: var(--secondary);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(23, 108, 171, 0.8), rgba(44, 153, 210, 0.8)), url('images/image1.jpg') no-repeat center center/cover;
+            color: white;
+            padding: 160px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .hero p.subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 10px 20px;
+            margin: 0 10px 10px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-item span {
+            color: white;
+            font-weight: 500;
+        }
+
+        .hero p.description {
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .trust-line {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 1.5rem;
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .problem h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .problem-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .problem-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .problem-image {
+            flex: 1;
+            min-width: 300px;
+            height: 350px;
+            background: url('images/image2.webp') no-repeat center/cover;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefits-list {
+            margin-top: 1.5rem;
+            list-style-type: none;
+        }
+
+        .benefits-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+        }
+
+        .benefits-list li:before {
+            content: '•';
+            color: var(--primary);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 10px;
+            top: -5px;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .benefits h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .benefit-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .benefit-card h3 {
+            color: white;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .benefit-card h3:before {
+            content: "✔";
+            margin-right: 10px;
+            background-color: white;
+            color: var(--primary);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .benefits-note {
+            text-align: center;
+            margin-top: 3rem;
+            font-weight: 500;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .process h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            text-align: center;
+            padding: 40px 20px;
+            background-color: var(--light);
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .process-step h3 {
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .process-tagline {
+            text-align: center;
+            margin-top: 3rem;
+            font-weight: 500;
+            color: var(--gray);
+        }
+
+        /* Trust Section */
+        .trust {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .trust-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .trust-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .trust-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .trust-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .contact-info {
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .disclaimer {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        /* Compliance Section */
+        .compliance {
+            padding: 40px 0;
+            background-color: #f1f5f9;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h4:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        /* Quote Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            position: relative;
+            animation: modalFade 0.3s;
+        }
+
+        @keyframes modalFade {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .close-modal:hover {
+            color: var(--dark);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .form-footer button {
+            padding: 12px 30px;
+        }
+
+        .form-disclaimer {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p.subtitle {
+                font-size: 1.2rem;
+            }
+
+            .feature-list {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .feature-item {
+                width: 100%;
+                max-width: 300px;
+                margin-right: 0;
+            }
+
+            .process-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .process-step {
+                width: 100%;
+                max-width: 350px;
+            }
+
+            .navbar .container {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 10px 20px;
+            }
+
+            .logo-title {
+                font-size: 1rem;
+            }
+
+            .logo img {
+                height: 75px;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                /* Adjust based on navbar height */
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                transition: left 0.3s ease;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid var(--light-gray);
+                border-bottom: none;
+                z-index: 1000;
+                gap: 30px;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-link {
+                font-size: 1.2rem;
+            }
+
+            .navbar .cta-button {
+                display: none;
+                /* Hide main CTAs inside header on mobile to avoid clutter */
+            }
+
+            .nav-menu .cta-button {
+                display: block;
+                width: auto;
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 140px 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+
+            .hero p.subtitle {
+                font-size: 1.1rem;
+            }
+
+            .problem,
+            .benefits,
+            .process,
+            .trust {
+                padding: 60px 0;
+            }
+
+            .modal-content {
+                margin: 20% auto;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="#home">
+                    <img src="images/logo-stanford.png" alt="Stafford Insurance Solutions Logo">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#benefits" class="nav-link">Benefits</a></li>
+                <li><a href="#how-it-works" class="nav-link">How it Works</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#" class="cta-button nav-quote-btn">Get Your FREE Quote</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Final Expense Insurance for Ages 45–85</h1>
+            <p class="subtitle">Protect Your Family from Funeral Costs — Up to $25,000 in Coverage</p>
+
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span>✔ No Medical Exam</span>
+                </div>
+                <div class="feature-item">
+                    <span>✔ Most People Qualify</span>
+                </div>
+                <div class="feature-item">
+                    <span>✔ Rates Locked in for Life</span>
+                </div>
+                <div class="feature-item">
+                    <span>✔ Fast Approval</span>
+                </div>
+            </div>
+
+            <p class="description">Affordable coverage designed for people on fixed incomes.</p>
+
+            <a href="#" class="cta-button hero-quote-btn">👉 Get Your FREE Quote Now</a>
+
+            <p class="trust-line">Licensed Independent Insurance Agency | Serving FL, GA, IL, MI, NC, OH, SC, SD, TX,
+                VA, PA</p>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <h2>Don't Leave Your Family with the Burden</h2>
+
+            <div class="problem-content">
+                <div class="problem-text">
+                    <p>Funeral and end-of-life expenses can cost thousands of dollars. Without a plan in place, those
+                        costs fall directly on your loved ones.</p>
+
+                    <p>Final Expense Insurance provides direct cash benefits to your family to help cover:</p>
+
+                    <ul class="benefits-list">
+                        <li>Funeral & burial expenses</li>
+                        <li>Medical bills</li>
+                        <li>Outstanding debts</li>
+                        <li>Immediate household expenses</li>
+                    </ul>
+                </div>
+
+                <div class="problem-image"></div>
+            </div>
+
+            <p class="tagline">Simple protection. Real peace of mind.</p>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <h2>Why Choose Final Expense Coverage?</h2>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>Coverage up to $25,000</h3>
+                    <p>Get the coverage you need to ensure all final expenses are handled properly.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <h3>No medical exam required</h3>
+                    <p>Skip the hassle of medical exams and get approved more easily.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <h3>Simple health questions</h3>
+                    <p>Just answer a few straightforward health questions to qualify.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <h3>Accept prior conditions</h3>
+                    <p>Most applicants qualify — even with health conditions.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <h3>Premiums never increase</h3>
+                    <p>Lock in your rate for life, with no surprises or rate increases.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <h3>Simple claims process</h3>
+                    <p>No complicated claims process when your family needs help most.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <h3>Direct payment</h3>
+                    <p>Funds paid directly to your chosen beneficiary when needed.</p>
+                </div>
+            </div>
+
+            <p class="benefits-note">This coverage is specifically designed for individuals ages 45–85.</p>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Fill out the short form</h3>
+                    <p>It takes less than 2 minutes to complete our simple information request.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Speak with a licensed agent</h3>
+                    <p>Our licensed professionals will help find the right coverage for your needs.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Choose a plan for your budget</h3>
+                    <p>Select an affordable plan that provides the protection your family needs.</p>
+                </div>
+            </div>
+
+            <p class="process-tagline">That's it. No pressure. No obligation.</p>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="cta-button process-quote-btn">Get Started Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust" id="about">
+        <div class="container">
+            <h2>About Stafford Insurance Solutions</h2>
+
+            <div class="trust-content">
+                <div class="trust-info">
+                    <p>Stafford Insurance Solutions connects individuals with licensed independent insurance
+                        professionals who provide personalized final expense coverage options.</p>
+
+                    <p><strong>Licensed Independent Agent</strong><br>
+                        National Producer Number (NPN): 22051025</p>
+
+                    <div class="contact-info">
+                        <i>📞</i> (239) 486-4142
+                    </div>
+
+                    <div class="contact-info">
+                        <i>📍</i> 5765 Riverside Drive, Cape Coral, FL, USA
+                    </div>
+
+                    <div class="disclaimer">
+                        <p>This website is operated by independent insurance agents and is not affiliated with any
+                            government agency.</p>
+                    </div>
+                </div>
+
+                <div class="trust-image">
+                    <img src="images/image3.webp" alt="Stafford Insurance Solutions Agent">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compliance Section -->
+    <section class="compliance">
+        <div class="container">
+            <p>By providing your phone number and submitting this form, you agree to be contacted by a licensed
+                insurance agent via phone call, text message, or email regarding life insurance products. Calls and
+                texts may use automated systems or prerecorded messages. Consent is not required to purchase. Message
+                and data rates may apply. You may opt out at any time.</p>
+
+            <p>This is an advertisement for life insurance.</p>
+
+            <p>Coverage available for ages 45–85. Benefits and coverage amounts vary by plan and eligibility. Not all
+                applicants qualify. Coverage amounts are subject to underwriting approval. There is no guarantee that
+                all final expenses will be covered.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo footer-logo" style="margin-bottom: 20px;">
+                        <img src="images/logo-stanford.png" alt="Stafford Insurance Solutions Logo"
+                            style="height: 100px;">
+                    </div>
+                    <p style="color: #ccc; font-size: 0.9rem;">Providing professional final expense solutions to protect
+                        your family's future.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Stafford Insurance</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#benefits">Our Services</a></li>
+                        <li><a href="#how-it-works">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>(239) 486-4142</p>
+                    <p>5765 Riverside Drive, Cape Coral, FL, USA</p>
+                    <p>Licensed in: FL, GA, IL, MI, NC, OH, SC, SD, TX, VA, PA</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Copyright ©️ 2026 Stafford Insurance Solutions - All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Quote Modal -->
+    <div id="quoteModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 style="text-align: center; color: var(--primary);">Get Your FREE Quote</h2>
+            <p style="text-align: center; margin-bottom: 30px;">Fill out this quick form to get started with no
+                obligation.</p>
+
+            <form id="quoteForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <select id="age" required>
+                        <option value="">Select your age</option>
+                        <option value="45-55">45-55</option>
+                        <option value="56-65">56-65</option>
+                        <option value="66-75">66-75</option>
+                        <option value="76-85">76-85</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <select id="state" required>
+                        <option value="">Select your state</option>
+                        <option value="FL">Florida (FL)</option>
+                        <option value="GA">Georgia (GA)</option>
+                        <option value="IL">Illinois (IL)</option>
+                        <option value="MI">Michigan (MI)</option>
+                        <option value="NC">North Carolina (NC)</option>
+                        <option value="OH">Ohio (OH)</option>
+                        <option value="PA">Pennsylvania (PA)</option>
+                        <option value="SC">South Carolina (SC)</option>
+                        <option value="SD">South Dakota (SD)</option>
+                        <option value="TX">Texas (TX)</option>
+                        <option value="VA">Virginia (VA)</option>
+                    </select>
+                </div>
+
+                <div class="form-footer">
+                    <button type="submit" class="cta-button">Submit Quote Request</button>
+                </div>
+
+                <div class="form-disclaimer">
+                    By submitting this form, you agree to be contacted by a licensed insurance agent regarding life
+                    insurance products.
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Back to top button -->
+    <div class="back-to-top">↑</div>
+
+    <script>
+        // Hamburger Menu functionality
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('quoteModal');
+        const quoteButtons = document.querySelectorAll('.hero-quote-btn, .process-quote-btn, .nav-quote-btn');
+        const closeModal = document.querySelector('.close-modal');
+
+        quoteButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Form submission
+        const quoteForm = document.getElementById('quoteForm');
+
+        quoteForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Here you would typically handle the form submission with AJAX
+            alert('Thank you! A licensed agent will contact you shortly.');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>
