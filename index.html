@@ -9,11 +9,21 @@
     <style>
         :root {
             --primary: #176CAB;
+            --primary-dark: #0e4f7e;
             --secondary: #2C99D2;
-            --light: #f8f9fa;
-            --dark: #343a40;
+            --secondary-light: #5bb8e8;
+            --accent: #f0a500;
+            --light: #f4f7fa;
+            --dark: #1e2a38;
             --gray: #6c757d;
-            --light-gray: #e9ecef;
+            --light-gray: #e3e8ed;
+            --gradient-primary: linear-gradient(135deg, #176CAB 0%, #2C99D2 50%, #3aa8e0 100%);
+            --gradient-hero: linear-gradient(135deg, #0e4f7e 0%, #176CAB 40%, #2C99D2 100%);
+            --shadow-sm: 0 2px 8px rgba(23, 108, 171, 0.08);
+            --shadow-md: 0 8px 24px rgba(23, 108, 171, 0.12);
+            --shadow-lg: 0 16px 48px rgba(23, 108, 171, 0.16);
+            --radius: 12px;
+            --radius-lg: 20px;
         }
 
         html {
@@ -30,10 +40,11 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: #333;
+            line-height: 1.7;
+            color: #2d3748;
             background-color: #fff;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         h1,
@@ -60,12 +71,15 @@
 
         /* Navigation */
         .navbar {
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 1px 20px rgba(23, 108, 171, 0.08);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            transition: all 0.3s ease;
         }
 
         .navbar .container {
@@ -165,44 +179,186 @@
 
         .cta-button {
             display: inline-block;
-            background-color: var(--primary);
+            background: var(--gradient-primary);
             color: white;
-            padding: 10px 25px;
+            padding: 12px 30px;
             border-radius: 50px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             border: none;
             cursor: pointer;
             font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.3px;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
         }
 
         .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(23, 108, 171, 0.35);
+        }
+
+        .cta-button.call-btn {
+            background-color: var(--primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .cta-button.call-btn:hover {
             background-color: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Contact Section at Bottom */
+        .contact-section {
+            padding: 100px 0;
+            background: linear-gradient(180deg, white 0%, var(--light) 100%);
+            position: relative;
+        }
+
+        .contact-container {
+            max-width: 720px;
+            margin: 0 auto;
+            background: white;
+            padding: 48px 44px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(23, 108, 171, 0.06);
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .contact-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-header p {
+            color: var(--gray);
+            font-size: 1.05rem;
+        }
+
+        .contact-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 600px) {
+            .contact-form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: span 1;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                align-items: center;
+            }
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(23, 108, 171, 0.8), rgba(44, 153, 210, 0.8)), url('images/image1.jpg') no-repeat center center/cover;
+            background: linear-gradient(160deg, rgba(14, 79, 126, 0.92), rgba(23, 108, 171, 0.85), rgba(44, 153, 210, 0.8)), url('images/image1.jpg') no-repeat center center/cover;
             color: white;
-            padding: 220px 0 140px;
+            padding: 200px 0 120px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(44, 153, 210, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
         }
 
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 1rem;
             color: white;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .hero p.subtitle {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             margin-bottom: 2rem;
-            max-width: 800px;
+            max-width: 750px;
             margin-left: auto;
             margin-right: auto;
+            opacity: 0.95;
+            font-weight: 400;
+            animation: fadeInUp 0.8s ease-out 0.15s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .feature-list {
@@ -216,11 +372,19 @@
         .feature-item {
             display: flex;
             align-items: center;
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50px;
-            padding: 10px 20px;
-            margin: 0 10px 10px 0;
-            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            margin: 0;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .feature-item:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
         }
 
         .feature-item span {
@@ -243,13 +407,27 @@
 
         /* Problem Section */
         .problem {
-            padding: 80px 0;
+            padding: 100px 0;
             background-color: var(--light);
+            position: relative;
         }
 
         .problem h2 {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .problem h2 + .problem-content {
+            margin-top: 2rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
         }
 
         .problem-content {
@@ -267,10 +445,15 @@
         .problem-image {
             flex: 1;
             min-width: 300px;
-            height: 350px;
+            height: 380px;
             background: url('images/image2.webp') no-repeat center/cover;
-            border-radius: 10px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.4s ease;
+        }
+
+        .problem-image:hover {
+            transform: scale(1.02);
         }
 
         .benefits-list {
@@ -296,22 +479,42 @@
         .tagline {
             font-size: 1.25rem;
             font-weight: 600;
-            color: var(--secondary);
-            margin-top: 1.5rem;
+            color: var(--primary);
+            margin-top: 2rem;
             text-align: center;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, rgba(23, 108, 171, 0.05), rgba(44, 153, 210, 0.08));
+            border-radius: var(--radius);
+            display: inline-block;
+            width: 100%;
         }
 
         /* Benefits Section */
         .benefits {
-            padding: 80px 0;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 40%, var(--secondary) 100%);
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefits::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
         }
 
         .benefits h2 {
             text-align: center;
             margin-bottom: 3rem;
             color: white;
+            font-size: 2rem;
+            position: relative;
         }
 
         .benefits-grid {
@@ -321,16 +524,20 @@
         }
 
         .benefit-card {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius);
             padding: 30px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(12px);
+            position: relative;
         }
 
         .benefit-card:hover {
-            transform: translateY(-10px);
-            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-8px);
+            background-color: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
         .benefit-card h3 {
@@ -363,13 +570,14 @@
 
         /* Process Section */
         .process {
-            padding: 80px 0;
+            padding: 100px 0;
             background-color: white;
         }
 
         .process h2 {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 1rem;
+            font-size: 2rem;
         }
 
         .process-steps {
@@ -384,33 +592,37 @@
             min-width: 250px;
             max-width: 350px;
             text-align: center;
-            padding: 40px 20px;
+            padding: 45px 25px 35px;
             background-color: var(--light);
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
             position: relative;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid transparent;
         }
 
         .process-step:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(23, 108, 171, 0.1);
         }
 
         .step-number {
             position: absolute;
-            top: -20px;
+            top: -22px;
             left: 50%;
             transform: translateX(-50%);
-            width: 40px;
-            height: 40px;
-            background-color: var(--primary);
+            width: 44px;
+            height: 44px;
+            background: var(--gradient-primary);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(23, 108, 171, 0.3);
         }
 
         .process-step h3 {
@@ -427,7 +639,7 @@
 
         /* Trust Section */
         .trust {
-            padding: 80px 0;
+            padding: 100px 0;
             background-color: var(--light);
         }
 
@@ -452,7 +664,13 @@
         .trust-image img {
             max-width: 100%;
             height: auto;
-            border-radius: 10px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            transition: transform 0.4s ease;
+        }
+
+        .trust-image img:hover {
+            transform: scale(1.02);
         }
 
         .contact-info {
@@ -476,17 +694,19 @@
 
         /* Compliance Section */
         .compliance {
-            padding: 40px 0;
-            background-color: #f1f5f9;
-            font-size: 0.85rem;
+            padding: 45px 0;
+            background-color: #edf1f5;
+            font-size: 0.82rem;
             color: var(--gray);
+            line-height: 1.6;
+            border-top: 1px solid var(--light-gray);
         }
 
         /* Footer */
         .footer {
             background-color: var(--dark);
             color: white;
-            padding: 40px 0 20px;
+            padding: 50px 0 20px;
         }
 
         .footer-content {
@@ -601,25 +821,55 @@
             margin-bottom: 20px;
         }
 
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 3px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .checkbox-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.4;
+            cursor: pointer;
+        }
+
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 7px;
             font-weight: 500;
+            font-size: 0.92rem;
+            color: var(--dark);
         }
 
         .form-group input,
         .form-group select {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 13px 16px;
+            border: 1.5px solid var(--light-gray);
+            border-radius: 10px;
             font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            background-color: #fafbfc;
+            transition: all 0.3s ease;
         }
 
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
-            border-color: var(--secondary);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(23, 108, 171, 0.1);
+            background-color: #fff;
         }
 
         .form-footer {
@@ -628,7 +878,9 @@
         }
 
         .form-footer button {
-            padding: 12px 30px;
+            padding: 14px 50px;
+            font-size: 1.05rem;
+            letter-spacing: 0.3px;
         }
 
         .form-disclaimer {
@@ -641,12 +893,12 @@
         /* Back to top button */
         .back-to-top {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--primary);
+            bottom: 24px;
+            right: 24px;
+            background: var(--gradient-primary);
             color: white;
-            width: 40px;
-            height: 40px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -656,6 +908,13 @@
             visibility: hidden;
             transition: all 0.3s ease;
             z-index: 999;
+            box-shadow: 0 4px 15px rgba(23, 108, 171, 0.3);
+            font-size: 1.2rem;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(23, 108, 171, 0.4);
         }
 
         .back-to-top.visible {
@@ -793,7 +1052,7 @@
                 <li><a href="#benefits" class="nav-link">Benefits</a></li>
                 <li><a href="#how-it-works" class="nav-link">How it Works</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#" class="cta-button nav-quote-btn">Get Your FREE Quote</a></li>
+                <li><a href="tel:2394864142" class="cta-button call-btn">Call Now</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -826,7 +1085,10 @@
 
             <p class="description">Affordable coverage designed for people on fixed incomes.</p>
 
-            <a href="#" class="cta-button hero-quote-btn">👉 Get Your FREE Quote Now</a>
+            <div class="cta-group">
+                <a href="tel:2394864142" class="cta-button call-btn" style="padding: 15px 40px; font-size: 1.2rem;">Call
+                    Us Now</a>
+            </div>
 
             <p class="trust-line">Licensed Independent Insurance Agency | Serving FL, GA, IL, MI, NC, OH, SC, SD, TX,
                 VA, PA</p>
@@ -836,7 +1098,8 @@
     <!-- Problem Section -->
     <section class="problem">
         <div class="container">
-            <h2>Don't Leave Your Family with the Burden</h2>
+            <h2>Don’t Leave Your Family with the Burden</h2>
+            <p class="section-subtitle">Plan ahead so your loved ones aren’t left with unexpected financial stress.</p>
 
             <div class="problem-content">
                 <div class="problem-text">
@@ -934,7 +1197,8 @@
             <p class="process-tagline">That's it. No pressure. No obligation.</p>
 
             <div style="text-align: center; margin-top: 40px;">
-                <a href="#" class="cta-button process-quote-btn">Get Started Now</a>
+                <a href="tel:2394864142" class="cta-button call-btn" style="padding: 15px 40px; font-size: 1.2rem;">Call
+                    Now</a>
             </div>
         </div>
     </section>
@@ -953,11 +1217,11 @@
                         National Producer Number (NPN): 22051025</p>
 
                     <div class="contact-info">
-                        <i>📞</i> (239) 486-4142
+                        (239) 486-4142
                     </div>
 
                     <div class="contact-info">
-                        <i>📍</i> 5765 Riverside Drive, Cape Coral, FL, USA
+                        5765 Riverside Drive, Cape Coral, FL, USA
                     </div>
 
                     <div class="disclaimer">
@@ -976,10 +1240,12 @@
     <!-- Compliance Section -->
     <section class="compliance">
         <div class="container">
-            <p>By providing your phone number and submitting this form, you agree to be contacted by a licensed
-                insurance agent via phone call, text message, or email regarding life insurance products. Calls and
-                texts may use automated systems or prerecorded messages. Consent is not required to purchase. Message
-                and data rates may apply. You may opt out at any time.</p>
+            <p>By providing my phone number and clicking “Submit,” I agree that Michael Stafford, a licensed insurance
+                agent, and/or his authorized representatives may contact me by phone, text, or email with information
+                about life insurance products. Calls and texts may be made using automated dialing systems or
+                prerecorded/artificial voice messages. My consent is not required to make a purchase. Message and data
+                rates may apply. Message frequency may vary. I may opt out at any time by replying STOP or by contacting
+                Michael Stafford at Staffordinsuranceagency.com</p>
 
             <p>This is an advertisement for life insurance.</p>
 
@@ -990,6 +1256,77 @@
     </section>
 
     <!-- Footer -->
+    <!-- Contact Form Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-header">
+                    <h2>Get Your Free, No-Obligation Quote</h2>
+                    <p>Speak with a licensed professional today and protect your family's future.</p>
+                </div>
+                <form id="contactForm">
+                    <div class="contact-form-grid">
+                        <div class="form-group">
+                            <label for="contact-fullName">Full Name</label>
+                            <input type="text" id="contact-fullName" name="from_name" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-age">Age</label>
+                            <select id="contact-age" name="age" required>
+                                <option value="">Select your age</option>
+                                <option value="45-55">45-55</option>
+                                <option value="56-65">56-65</option>
+                                <option value="66-75">66-75</option>
+                                <option value="76-85">76-85</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-phone">Phone Number</label>
+                            <input type="tel" id="contact-phone" name="phone" required placeholder="(555) 555-5555">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Email Address</label>
+                            <input type="email" id="contact-email" name="reply_to" required
+                                placeholder="john@example.com">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="contact-state">State</label>
+                            <select id="contact-state" name="state" required>
+                                <option value="">Select your state</option>
+                                <option value="FL">Florida (FL)</option>
+                                <option value="GA">Georgia (GA)</option>
+                                <option value="IL">Illinois (IL)</option>
+                                <option value="MI">Michigan (MI)</option>
+                                <option value="NC">North Carolina (NC)</option>
+                                <option value="OH">Ohio (OH)</option>
+                                <option value="PA">Pennsylvania (PA)</option>
+                                <option value="SC">South Carolina (SC)</option>
+                                <option value="SD">South Dakota (SD)</option>
+                                <option value="TX">Texas (TX)</option>
+                                <option value="VA">Virginia (VA)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="checkbox-group" style="margin-top: 20px; margin-bottom: 15px;">
+                        <input type="checkbox" id="tcpa-consent" name="tcpa_consent" required>
+                        <label for="tcpa-consent" class="checkbox-label">
+                            By providing my phone number and clicking “Submit,” I agree that Michael Stafford, a
+                            licensed insurance agent, and/or his authorized representatives may contact me by phone,
+                            text, or email with information about life insurance products. Calls and texts may be made
+                            using automated dialing systems or prerecorded/artificial voice messages. My consent is not
+                            required to make a purchase. Message and data rates may apply. Message frequency may vary. I
+                            may opt out at any time by replying STOP or by contacting Michael Stafford at
+                            Staffordinsuranceagency.com
+                        </label>
+                    </div>
+                    <div class="form-footer" style="margin-top: 10px;">
+                        <button type="submit" class="cta-button" style="padding: 14px 50px; font-size: 1.05rem;">Submit Quote Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -1006,7 +1343,7 @@
                     <ul>
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#benefits">Our Services</a></li>
-                        <li><a href="#how-it-works">Contact Us</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
                     </ul>
                 </div>
 
@@ -1024,74 +1361,15 @@
         </div>
     </footer>
 
-    <!-- Quote Modal -->
-    <div id="quoteModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2 style="text-align: center; color: var(--primary);">Get Your FREE Quote</h2>
-            <p style="text-align: center; margin-bottom: 30px;">Fill out this quick form to get started with no
-                obligation.</p>
-
-            <form id="quoteForm">
-                <div class="form-group">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="age">Age</label>
-                    <select id="age" required>
-                        <option value="">Select your age</option>
-                        <option value="45-55">45-55</option>
-                        <option value="56-65">56-65</option>
-                        <option value="66-75">66-75</option>
-                        <option value="76-85">76-85</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="state">State</label>
-                    <select id="state" required>
-                        <option value="">Select your state</option>
-                        <option value="FL">Florida (FL)</option>
-                        <option value="GA">Georgia (GA)</option>
-                        <option value="IL">Illinois (IL)</option>
-                        <option value="MI">Michigan (MI)</option>
-                        <option value="NC">North Carolina (NC)</option>
-                        <option value="OH">Ohio (OH)</option>
-                        <option value="PA">Pennsylvania (PA)</option>
-                        <option value="SC">South Carolina (SC)</option>
-                        <option value="SD">South Dakota (SD)</option>
-                        <option value="TX">Texas (TX)</option>
-                        <option value="VA">Virginia (VA)</option>
-                    </select>
-                </div>
-
-                <div class="form-footer">
-                    <button type="submit" class="cta-button">Submit Quote Request</button>
-                </div>
-
-                <div class="form-disclaimer">
-                    By submitting this form, you agree to be contacted by a licensed insurance agent regarding life
-                    insurance products.
-                </div>
-            </form>
-        </div>
-    </div>
-
     <!-- Back to top button -->
     <div class="back-to-top">↑</div>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("5CzPS0waMXWPGh-wJ");
+        })();
+    </script>
     <script>
         // Hamburger Menu functionality
         const hamburger = document.querySelector('.hamburger');
@@ -1112,41 +1390,35 @@
             });
         });
 
-        // Modal functionality
-        const modal = document.getElementById('quoteModal');
-        const quoteButtons = document.querySelectorAll('.hero-quote-btn, .process-quote-btn, .nav-quote-btn');
-        const closeModal = document.querySelector('.close-modal');
+        // Form submission (EmailJS)
+        const contactForm = document.getElementById('contactForm');
 
-        quoteButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            });
-        });
-
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Form submission
-        const quoteForm = document.getElementById('quoteForm');
-
-        quoteForm.addEventListener('submit', (e) => {
+        function handleFormSubmit(e) {
             e.preventDefault();
-            // Here you would typically handle the form submission with AJAX
-            alert('Thank you! A licensed agent will contact you shortly.');
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+
+            submitBtn.innerText = 'Sending...';
+            submitBtn.disabled = true;
+
+            emailjs.sendForm('service_4kq8u2c', 'template_565oaw6', form)
+                .then(() => {
+                    alert('Thank you! A licensed agent will contact you shortly.');
+                    form.reset();
+                }, (error) => {
+                    console.error('FAILED...', error);
+                    alert('Oops! Something went wrong. Please try calling us at (239) 486-4142.');
+                })
+                .finally(() => {
+                    submitBtn.innerText = originalBtnText;
+                    submitBtn.disabled = false;
+                });
+        }
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => handleFormSubmit(e));
+        }
 
         // Back to top button
         const backToTopButton = document.querySelector('.back-to-top');
