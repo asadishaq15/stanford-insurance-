@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stafford Insurance Solutions - Final Expense Insurance</title>
+    <link rel="icon" type="image/png" href="images/logo-stanford.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -1359,7 +1360,11 @@
                         National Producer Number (NPN): 22051025</p>
 
                     <div class="contact-info">
-                        (239) 486-4142
+                        +1 (877) 732-5755
+                    </div>
+
+                    <div class="contact-info">
+                        <a href="https://staffordinsuranceagency.com" style="text-decoration: none; color: inherit;">staffordinsuranceagency.com</a>
                     </div>
 
                     <div class="contact-info">
@@ -1388,7 +1393,7 @@
                 about life insurance products. Calls and texts may be made using automated dialing systems or
                 prerecorded/artificial voice messages. My consent is not required to make a purchase. Message and data
                 rates may apply. Message frequency may vary. I may opt out at any time by replying STOP or by contacting
-                Michael Stafford at Staffordinsuranceagency.com</p>
+                Michael Stafford at staffordinsuranceagency.com</p>
 
             <p>This is an advertisement for life insurance.</p>
 
@@ -1454,7 +1459,7 @@
                             using automated dialing systems or prerecorded/artificial voice messages. My consent is not
                             required to make a purchase. Message and data rates may apply. Message frequency may vary. I
                             may opt out at any time by replying STOP or by contacting Michael Stafford at
-                            Staffordinsuranceagency.com
+                            staffordinsuranceagency.com
                         </label>
                         <div class="error-message" style="margin-top: 5px;">You must agree to the terms to proceed.
                         </div>
@@ -1490,7 +1495,8 @@
 
                 <div class="footer-section">
                     <h4>Contact</h4>
-                    <p>(239) 486-4142</p>
+                    <p>+1 (877) 732-5755</p>
+                    <p><a href="https://staffordinsuranceagency.com" style="color: #ccc; text-decoration: none;">staffordinsuranceagency.com</a></p>
                     <p>5765 Riverside Drive, Cape Coral, FL, USA</p>
                     <p>Licensed in: FL, GA, IL, MI, NC, OH, SC, SD, TX, VA, PA</p>
                 </div>
@@ -1558,7 +1564,7 @@
                         using automated dialing systems or prerecorded/artificial voice messages. My consent is not
                         required to make a purchase. Message and data rates may apply. Message frequency may vary. I
                         may opt out at any time by replying STOP or by contacting Michael Stafford at
-                        Staffordinsuranceagency.com
+                        staffordinsuranceagency.com
                     </label>
                     <div class="error-message" style="margin-top: 5px;">You must agree to the terms to proceed.</div>
                 </div>
@@ -1740,7 +1746,7 @@
 
             // If already submitted successfully, just dial
             if (submitBtn.dataset.submitted === 'true') {
-                window.location.href = 'tel:2394864142';
+                window.location.href = 'tel:+18777325755';
                 return;
             }
 
@@ -1759,7 +1765,7 @@
                     submitBtn.disabled = false;
 
                     // Automatically trigger the dialer
-                    window.location.href = 'tel:2394864142';
+                    window.location.href = 'tel:+18777325755';
 
                     // Specific success message
                     let successContainer = form.querySelector('.success-message');
@@ -1782,7 +1788,7 @@
                     `;
                 }, (error) => {
                     console.error('FAILED...', error);
-                    alert('Submission failed. Please call us directly at (239) 486-4142.');
+                    alert('Submission failed. Please call us directly at +1 (877) 732-5755.');
                     submitBtn.innerText = originalBtnText;
                     submitBtn.disabled = false;
                 });
