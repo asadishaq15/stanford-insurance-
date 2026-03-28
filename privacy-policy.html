@@ -24,6 +24,12 @@
             --radius-lg: 20px;
         }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box !important;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             line-height: 1.7;
@@ -31,6 +37,7 @@
             background-color: #fff;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
 
         .container {
@@ -47,6 +54,7 @@
             position: fixed;
             width: 100%;
             top: 0;
+            left: 0;
             z-index: 1000;
         }
 
@@ -62,15 +70,27 @@
             width: auto;
         }
 
-        .nav-link {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
         .nav-link:hover {
             color: var(--primary);
+        }
+
+        .back-home-btn {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .back-home-btn:hover {
+            background-color: var(--primary);
+            color: white;
         }
 
         /* Content Page Header */
@@ -166,6 +186,63 @@
             color: #ccc;
             font-size: 0.9rem;
         }
+
+        @media (max-width: 768px) {
+            .navbar .container {
+                padding: 8px 15px;
+            }
+
+            .page-header {
+                padding: 100px 0 35px;
+            }
+
+            .page-header h1 {
+                font-size: 1.7rem;
+            }
+
+            .legal-content {
+                padding: 35px 0;
+            }
+
+            .legal-content h2 {
+                font-size: 1.4rem;
+                margin-top: 25px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .logo img {
+                height: 45px;
+            }
+
+            .back-home-btn {
+                padding: 5px 10px;
+                font-size: 0.75rem;
+                gap: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar .container {
+                gap: 5px;
+            }
+
+            .back-home-btn span {
+                display: none;
+            }
+
+            .back-home-btn:after {
+                content: ' Home';
+                display: inline;
+            }
+
+            .logo img {
+                height: 38px;
+            }
+        }
     </style>
 </head>
 
@@ -175,7 +252,7 @@
             <a href="index.html" class="logo">
                 <img src="images/logo-stanford.png" alt="Stafford Insurance Solutions Logo">
             </a>
-            <a href="index.html" class="nav-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            <a href="index.html" class="back-home-btn"><i class="fas fa-arrow-left"></i> <span>Back to Home</span></a>
         </div>
     </nav>
 
@@ -189,16 +266,20 @@
     <main class="legal-content">
         <div class="container">
             <h2>Information We Collect</h2>
-            <p>We collect information you provide directly to us, such as when you fill out a form, request a quote, or contact us.</p>
+            <p>We collect information you provide directly to us, such as when you fill out a form, request a quote, or
+                contact us.</p>
 
             <h2>How We Use Your Information</h2>
-            <p>We use the information we collect to connect you with licensed insurance agents, provide you with information about insurance products, and improve our services.</p>
+            <p>We use the information we collect to connect you with licensed insurance agents, provide you with
+                information about insurance products, and improve our services.</p>
 
             <h2>Information Sharing</h2>
-            <p>We may share your information with licensed insurance agents and partners who can provide you with insurance quotes and information.</p>
+            <p>We may share your information with licensed insurance agents and partners who can provide you with
+                insurance quotes and information.</p>
 
             <h2>Your Rights</h2>
-            <p>You have the right to access, update, or delete your personal information. You may also opt out of certain communications.</p>
+            <p>You have the right to access, update, or delete your personal information. You may also opt out of
+                certain communications.</p>
         </div>
     </main>
 
@@ -207,9 +288,11 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="logo footer-logo" style="margin-bottom: 20px;">
-                        <img src="images/logo-stanford.png" alt="Stafford Insurance Solutions Logo" style="height: 100px;">
+                        <img src="images/logo-stanford.png" alt="Stafford Insurance Solutions Logo"
+                            style="height: 100px;">
                     </div>
-                    <p style="color: #ccc; font-size: 0.9rem;">Providing professional final expense solutions to protect your family's future.</p>
+                    <p style="color: #ccc; font-size: 0.9rem;">Providing professional final expense solutions to protect
+                        your family's future.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
@@ -223,7 +306,8 @@
                 <div class="footer-section">
                     <h4>Contact</h4>
                     <p style="margin-bottom: 10px;">+1 (877) 732-5755</p>
-                    <p style="margin-bottom: 10px;"><a href="https://staffordinsuranceagency.com" style="color: #ccc; text-decoration: none;">staffordinsuranceagency.com</a></p>
+                    <p style="margin-bottom: 10px;"><a href="https://staffordinsuranceagency.com"
+                            style="color: #ccc; text-decoration: none;">staffordinsuranceagency.com</a></p>
                     <p style="margin-bottom: 10px;">5765 Riverside Drive, Cape Coral, FL, USA</p>
                 </div>
             </div>
