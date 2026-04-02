@@ -1,0 +1,10 @@
+{
+  "name": "stanford-insurance-proxy",
+  "version": "1.0.0",
+  "description": "Proxy server for Stafford Insurance CRM integration",
+  "main": "server.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs"
+  }
+}

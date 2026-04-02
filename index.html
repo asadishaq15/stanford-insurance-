@@ -1243,6 +1243,7 @@
                 <li><a href="#benefits" class="nav-link">Benefits</a></li>
                 <li><a href="#how-it-works" class="nav-link">How it Works</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="get-quote.html" class="nav-link">Get A Quote</a></li>
                 <li><button type="button" class="cta-button call-btn open-capture">Request A Call</button></li>
             </ul>
             <div class="hamburger">
@@ -1547,6 +1548,7 @@
                     <ul>
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#benefits">Our Services</a></li>
+                        <li><a href="get-quote.html">Get A Quote</a></li>
                         <li><a href="#contact">Contact Us</a></li>
                     </ul>
                 </div>
@@ -1802,6 +1804,65 @@
             return isValid;
         }
 
+        // State abbreviation to CRM numeric ID mapping
+        const STATE_TO_CRM_ID = {
+            'AL': 1, 'AK': 2, 'AZ': 3, 'AR': 4, 'CA': 5, 'CO': 6, 'CT': 7, 'DE': 8,
+            'DC': 9, 'FL': 10, 'GA': 11, 'HI': 12, 'ID': 13, 'IL': 14, 'IN': 15, 'IA': 16,
+            'KS': 17, 'KY': 18, 'LA': 19, 'ME': 20, 'MD': 21, 'MA': 22, 'MI': 23, 'MN': 24,
+            'MS': 26, 'MO': 25, 'MT': 27, 'NE': 28, 'NV': 29, 'NH': 30, 'NJ': 31, 'NM': 32,
+            'NY': 33, 'NC': 34, 'ND': 35, 'OH': 36, 'OK': 37, 'OR': 38, 'PA': 39, 'PR': 52,
+            'RI': 40, 'SC': 41, 'SD': 42, 'TN': 43, 'TX': 44, 'UT': 45, 'VT': 46, 'VA': 47,
+            'WA': 48, 'WV': 49, 'WI': 50, 'WY': 51
+        };
+
+        // Post lead to Node Proxy (bypasses CORS & hides credentials)
+        function postToCRM(form) {
+            try {
+                const fullName = form.querySelector('input[name="from_name"]').value.trim();
+                
+                // Split name (e.g. "John Jacob Doe" -> "John" and "Doe")
+                const names = fullName.split(' ');
+                const firstName = names[0] || '';
+                const lastName = names.length > 1 ? names[names.length - 1] : '';
+
+                const email = form.querySelector('input[name="reply_to"]').value.trim();
+                const phone = form.querySelector('input[name="phone"]').value.replace(/\D/g, '');
+                const stateAbbr = form.querySelector('select[name="state"]').value;
+                const stateId = STATE_TO_CRM_ID[stateAbbr] || '';
+                const formSource = form.querySelector('input[name="source"]')
+                    ? form.querySelector('input[name="source"]').value
+                    : 'Contact Form';
+
+                const data = {
+                    first_name: firstName,
+                    last_name: lastName,
+                    full_name: fullName,
+                    email: email,
+                    phone: phone,
+                    state: stateId,
+                    policy_type: '570',
+                    website_name: 'Stafford Insurance Solutions',
+                    sticky_note: 'Lead from ' + formSource
+                };
+
+                // Pointing to your Node Proxy
+                fetch('http://localhost:3000/api/lead', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log('CRM Proxy Result:', result);
+                })
+                .catch(err => {
+                    console.warn('CRM Proxy call failed:', err);
+                });
+            } catch (err) {
+                console.warn('CRM post preparation failed:', err);
+            }
+        }
+
         // Shared Submission Logic
         function handleLeadSubmit(e, form) {
             e.preventDefault();
@@ -1821,6 +1882,9 @@
             const originalBtnText = submitBtn.innerText;
             submitBtn.innerText = 'Connecting...';
             submitBtn.disabled = true;
+
+            // Fire CRM API post in parallel (non-blocking)
+            postToCRM(form);
 
             emailjs.sendForm('service_4kq8u2c', 'template_565oaw6', form)
                 .then(() => {
