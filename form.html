@@ -474,7 +474,7 @@
             
             const submitBtn = form.querySelector('button[type="submit"]');
             if (submitBtn.dataset.submitted === 'true') {
-                window.location.href = 'tel:+18777325755';
+                window.location.href = 'thank-you.html';
                 return;
             }
 
@@ -518,9 +518,6 @@
             emailjs.sendForm('service_4kq8u2c', 'template_565oaw6', form)
                 .then(() => {
                     submitBtn.dataset.submitted = 'true';
-                    submitBtn.innerText = 'Call Us Now';
-                    submitBtn.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)';
-                    submitBtn.disabled = false;
                     
                     gtag('event', 'conversion', {
                         'send_to': 'AW-17976778703/uUwfCIqJg4ocEM-___tC',
@@ -529,11 +526,6 @@
                     });
 
                     window.location.href = 'thank-you.html';
-
-                    let success = document.createElement('div');
-                    success.style.cssText = 'background:#f0fdf4; border:1px solid #bbf7d0; padding:15px; border-radius:10px; margin-top:20px; text-align:center; color:#166534; font-weight:600;';
-                    success.innerHTML = 'Connecting you now! <br><span style="font-size:0.85rem; font-weight:400;">If the dialer didn\'t open, click the button above.</span>';
-                    form.appendChild(success);
                 }, (err) => {
                     alert('Submission failed. Please call us at +1 (877) 732-5755.');
                     submitBtn.innerText = 'Request A Call';

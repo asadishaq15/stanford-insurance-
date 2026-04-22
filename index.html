@@ -1868,9 +1868,9 @@
 
             const submitBtn = form.querySelector('button[type="submit"]');
 
-            // If already submitted successfully, just dial
+            // If already submitted successfully, redirect to thank you page
             if (submitBtn.dataset.submitted === 'true') {
-                window.location.href = 'tel:+18777325755';
+                window.location.href = 'thank-you.html';
                 return;
             }
 
@@ -1885,11 +1885,6 @@
                 .then(() => {
                     // Success!
                     submitBtn.dataset.submitted = 'true';
-                    submitBtn.innerText = 'Request A Call';
-                    submitBtn.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)';
-                    submitBtn.style.color = 'white';
-                    submitBtn.style.boxShadow = '0 10px 20px rgba(34, 197, 94, 0.3)';
-                    submitBtn.disabled = false;
 
                     // Trigger conversion event
                     gtag('event', 'conversion', {
@@ -1898,28 +1893,8 @@
                         'currency': 'USD'
                     });
 
-                    // Automatically redirect to thank you page
+                    // Redirect to thank you page
                     window.location.href = 'thank-you.html';
-
-                    // Specific success message
-                    let successContainer = form.querySelector('.success-message');
-                    if (!successContainer) {
-                        successContainer = document.createElement('div');
-                        successContainer.className = 'success-message';
-                        form.appendChild(successContainer);
-                    }
-
-                    successContainer.style.background = '#f0fdf4';
-                    successContainer.style.border = '1px solid #bbf7d0';
-                    successContainer.style.padding = '15px';
-                    successContainer.style.borderRadius = '10px';
-                    successContainer.style.marginTop = '20px';
-                    successContainer.style.textAlign = 'center';
-
-                    successContainer.innerHTML = `
-                        <p style="color: #166534; font-weight: 600; margin-bottom: 5px;">Connecting you now!</p>
-                        <p style="color: #166534; font-size: 0.9rem;">If the dialer didn't open automatically, click the button above.</p>
-                    `;
                 }, (error) => {
                     console.error('FAILED...', error);
                     alert('Submission failed. Please call us directly at +1 (877) 732-5755.');
